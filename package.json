@@ -15,6 +15,7 @@
     "terminal"
   ],
   "scripts": {
+    "prepublish" : "git submodule update --init",
     "test": "NODE_ENV=test mocha -R spec"
   },
   "tags": [
