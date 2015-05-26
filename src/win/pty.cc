@@ -287,13 +287,13 @@ open:
    int result = winpty_start_process(pc, shellpath.c_str(), cmdline, cwd, env);
    if(result != 0) {
       why << "Unable to start terminal process. Win32 error code: " << result;
-      exception = NanThrowError(why.str().c_str());
+      exception = NanError(why.str().c_str());
    }
    goto cleanup;
 
 invalid_filename:
    why << "File not found: " << shellpath_;
-   exception = NanThrowError(why.str().c_str());
+   exception = NanError(why.str().c_str());
    goto cleanup;
 
 cleanup:
@@ -303,7 +303,7 @@ cleanup:
   delete env;
 
   if(!exception.IsEmpty()) {
-    return exception;
+    NanThrowError(exception);
   }
 
   NanReturnUndefined();
